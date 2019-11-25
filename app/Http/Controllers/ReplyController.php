@@ -3,49 +3,46 @@
 namespace App\Http\Controllers;
 
 use App\Reply;
+use App\Question;
 use Illuminate\Http\Request;
+use App\Http\Resources\ReplyResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class ReplyController extends Controller
 {
     
-    public function index()
+    public function index(Question $question)
     {
-        //
+        return ReplyResource::collection($question->replies);
     }//end of index
 
-    
-    public function create()
+ 
+    public function store(Question $question, Request $request)
     {
-        //
-    }//end of create
+        $reply = $question->replies()->create($request->all());
 
-    
-    public function store(Request $request)
-    {
-        //
+        return response(['reply' => new ReplyResource($reply)], Response::HTTP_CREATED);
     }//end of store
 
     
-    public function show(Reply $reply)
+    public function show(Question $question, Reply $reply)
     {
-        //
+        return new ReplyResource($reply);
     }//end of show
 
 
-    public function edit(Reply $reply)
+    public function update(Question $question, Request $request, Reply $reply)
     {
-        //
-    }//end of edit
+        $reply->update($request->all());
 
-
-    public function update(Request $request, Reply $reply)
-    {
-        //
+        return response('Updated', Response::HTTP_ACCEPTED);
     }//end of update
 
     
-    public function destroy(Reply $reply)
+    public function destroy(Question $question, Reply $reply)
     {
-        //
+        $reply->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }//end of destroy
 }

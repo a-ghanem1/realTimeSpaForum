@@ -25,7 +25,7 @@ class Question extends Model
 
     public function replies()
     {
-    	return $this->hasMany(Replay::class);
+    	return $this->hasMany(Reply::class);
     }//end of replies relationship
     
     public function getPathAttribute()

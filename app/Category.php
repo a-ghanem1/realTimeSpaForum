@@ -13,9 +13,4 @@ class Category extends Model
         return 'slug';
     }//end of slug
 
-    public function getPathAttribute()
-    {
-        return asset("api/category/$this->slug");
-    }//end of path
-
 }//end of model
