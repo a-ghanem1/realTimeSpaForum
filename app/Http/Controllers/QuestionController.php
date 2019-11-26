@@ -10,6 +10,16 @@ use Symfony\Component\HttpFoundation\Response;
 class QuestionController extends Controller
 {
     
+    /**
+     * Create a new AuthController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('jwt', ['except' => ['index', 'show']]);
+    }
+
     public function index()
     {
         return QuestionResource::collection(Question::latest()->get());
@@ -18,9 +28,7 @@ class QuestionController extends Controller
     
     public function store(Request $request)
     {
-        //auth()->user()->questions()->created($request->all());
-
-        Question::create($request->all());
+        auth()->user()->questions()->create($request->all());
 
         return response('Created', Response::HTTP_CREATED);
     }//end of store

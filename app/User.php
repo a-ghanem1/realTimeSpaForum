@@ -56,4 +56,9 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }//end of jwt custom claims
 
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
 }//end of model
