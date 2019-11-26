@@ -1,5 +1,5 @@
 <template>
-  <v-footer>
+  <v-footer fixed>
   	My Cool Spa Forum
     <v-spacer></v-spacer>
     <div>&copy; {{ new Date().getFullYear() }}</div>

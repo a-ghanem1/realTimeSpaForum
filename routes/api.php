@@ -2,10 +2,10 @@
 
 //JWT Authentication 
 Route::group([
-
+	'middleware' => 'api',
     'prefix' => 'auth'
 
-], function () {
+], function ($router) {
 
     Route::post('login', 'AuthController@login');
     Route::post('signup', 'AuthController@signup');
