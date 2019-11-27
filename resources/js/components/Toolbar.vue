@@ -7,20 +7,13 @@
 
       <div>
 
-        <router-link> 
-          <v-btn text>Forum</v-btn>
-        </router-link>
-
-        <router-link> 
-          <v-btn text>Ask Question</v-btn>
-        </router-link>
-
-        <router-link> 
-          <v-btn text>Category</v-btn>
-        </router-link>
-
-        <router-link to="/login"> 
-          <v-btn text>Login</v-btn>
+        <router-link 
+          v-for="item in items"
+          :to="item.title"
+          :key="item.title"
+          v-if="item.show"
+          > 
+          <v-btn text>{{ item.title }}</v-btn>
         </router-link>
         
       </div>
@@ -30,6 +23,21 @@
 
 <script>
   export default {
-
+    data() {
+      return {
+        items: [
+          { title: 'Forum', to: '/forum', show: true },
+          { title: 'Ask Question', to: '/ask', show: User.loggedIn() },
+          { title: 'Category', to: '/category', show: User.loggedIn() },
+          { title: 'Login', to: '/login', show: !User.loggedIn() },
+          { title: 'logout', to: '/logout', show: User.loggedIn() }
+        ]
+      }
+    },
+    created() {
+      EventBus.$on('logout', () => {
+        User.logout()
+      })   
+    }
   }
 </script>

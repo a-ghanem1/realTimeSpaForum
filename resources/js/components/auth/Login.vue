@@ -38,6 +38,15 @@
 				  dark
 				  large
 				>Login</v-btn>
+
+				<router-link to="/signup">
+					<v-btn 
+					tile 
+					large
+					dark
+					color="primary"
+					>Sign Up</v-btn>
+				</router-link>
 			</v-col>
 		  </v-row>
 		</v-container>
@@ -52,6 +61,11 @@
 					email: null,
 					password: null
 				},
+			}
+		},
+		created() {
+			if (User.loggedIn()) {
+				this.$router.push({name: 'forum'})
 			}
 		},
 		methods: {
