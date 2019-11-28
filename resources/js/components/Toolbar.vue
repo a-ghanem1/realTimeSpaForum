@@ -9,7 +9,7 @@
 
         <router-link 
           v-for="item in items"
-          :to="item.title"
+          :to="item.to"
           :key="item.title"
           v-if="item.show"
           > 
@@ -41,3 +41,9 @@
     }
   }
 </script>
+
+<style>
+  a {
+    text-decoration: none;
+  }
+</style>

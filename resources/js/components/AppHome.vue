@@ -13,7 +13,7 @@
 	export default {
 		components: {
 			toolbar,
-			AppFooter
+			AppFooter,
 		}
 	}
 </script> 
