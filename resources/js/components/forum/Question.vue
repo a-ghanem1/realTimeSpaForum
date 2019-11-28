@@ -1,5 +1,5 @@
 <template>
-  <v-card tile>
+  <v-card tile class="mt-2">
     <v-card-title>
     	<router-link :to="question.path">
     		{{ question.title }}
