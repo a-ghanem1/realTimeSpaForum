@@ -4,6 +4,9 @@
       <v-toolbar-title>Acme Forum</v-toolbar-title>
 
       <v-spacer></v-spacer>
+      
+      <app-notification
+        v-if="loggedIn"></app-notification>
 
       <div>
 
@@ -22,9 +25,15 @@
 </template>
 
 <script>
+  import AppNotification from './AppNotification'
+
   export default {
+    components: {
+      AppNotification
+    },
     data() {
       return {
+        loggedIn: User.loggedIn(),
         items: [
           { title: 'Forum', to: '/forum', show: true },
           { title: 'Ask Question', to: '/ask', show: User.loggedIn() },
