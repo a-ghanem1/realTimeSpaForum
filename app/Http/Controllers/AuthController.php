@@ -17,8 +17,21 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('jwt', ['except' => ['login', 'signup']]);
+        $this->middleware('JWT', ['except' => ['login', 'signup']]);
     }
+
+
+    /**
+     * Sign up and Get a JWT via given credentials.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function signup(SignupRequest $request)
+    {
+    	User::create($request->all());
+    	return $this->login($request);
+    }
+
 
     /**
      * Get a JWT via given credentials.
@@ -35,18 +48,6 @@ class AuthController extends Controller
 
         return $this->respondWithToken($token);
     }
-
-    /**
-     * Sign up and Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function signup(SignupRequest $request)
-    {
-    	User::create($request->all());
-    	return $this->login($request);
-    }
-
 
     /**
      * Get the authenticated User.
@@ -92,8 +93,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()->name
+            'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
 

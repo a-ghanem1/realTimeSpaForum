@@ -12,7 +12,9 @@ class Reply extends Model
         parent::boot();
 
         static::creating(function ($reply) {
-            $reply->user_id = auth()->user()->id;
+            if (auth()->user()) {
+                $reply->user_id = auth()->user()->id;
+            }
         });
     }//end of boot
 
