@@ -34,8 +34,8 @@
 				<div 
 					v-for="(category,index) in categories"
 					:key="category.id"
-					@click="">
-					<v-list-item>
+					>
+					<v-list-item @click="">
 			    		<v-list-item-content>
 				          <v-list-item-title>{{ category.name }}</v-list-item-title>
 				        </v-list-item-content>
