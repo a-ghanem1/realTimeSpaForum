@@ -16,7 +16,7 @@
 		    <v-list-item
 		      v-for="item in unRead" :key="item.id">
 		      <router-link :to="item.path">
-		      	<v-list-item-title @click="readNotification(item)"><div class="red--text">{{ item.question }}</div></v-list-item-title>
+		      	<v-list-item-title @click="readNotification(item)"><div class="red--text">New Reply in "{{ item.question }}"</div></v-list-item-title>
 		      </router-link>
 		    </v-list-item>
 
@@ -25,7 +25,7 @@
 			<v-list-item
 		      v-for="item in read" :key="item.id">
 		      	
-	      		<v-list-item-title>{{ item.question }}</v-list-item-title>
+	      		<v-list-item-title>New Reply in "{{ item.question }}"</v-list-item-title>
 		    	
 		    </v-list-item>		    
 		  </v-list>
@@ -66,6 +66,9 @@
 						this.read   = res.data.read
 						this.unRead = res.data.unRead
 						this.unReadCount = res.data.unRead.length
+					})
+					.catch(error => {
+						Exception.handle(error)
 					})	
 			},
 			readNotification(notification) {

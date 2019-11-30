@@ -17,8 +17,13 @@
 			></replies>
 
 			<create-reply
+				v-if="loggedIn"
 				:questionSlug=question.slug
 			></create-reply>
+
+			<div class="mt-3 underline" v-else>
+				<router-link to="/login">Login to Reply</router-link>
+			</div>
 
 		</v-container>
 	</div>
@@ -41,6 +46,11 @@
 			return {
 				question: null,
 				editing: false
+			}
+		},
+		computed: {
+			loggedIn() {
+				return User.loggedIn()
 			}
 		},
 		created() {
@@ -67,3 +77,9 @@
 		}
 	}
 </script>
+
+<style>
+	.underline {
+		text-decoration: underline;
+	}
+</style>
