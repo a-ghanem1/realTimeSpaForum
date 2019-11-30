@@ -2,7 +2,7 @@
 	<v-container grid-list-md>
 		<v-layout row wrap>
 			<v-flex xs8>
-				<v-toolbar color="cyan" dark dense class="mt-2">
+				<v-toolbar color="indigo" dark dense class="mt-2">
 		      		<v-toolbar-title>Questions</v-toolbar-title>
 		    	</v-toolbar>
 				<question

@@ -1,6 +1,6 @@
 <template>
 	<v-card tile>
-		<v-container fluid>
+		<v-container>
 			<v-card-title>
 				<div>
 					<div class="headline">

@@ -1,6 +1,6 @@
 <template>
 	<v-card>
-		<v-container fluid>
+		<v-container>
 			<v-form @submit.prevent="update">
 				<v-row>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Question;
 use Illuminate\Http\Request;
+use App\Http\Requests\QuestionRequest;
 use App\Http\Resources\QuestionResource;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,7 +27,7 @@ class QuestionController extends Controller
     }//end of index
 
     
-    public function store(Request $request)
+    public function store(QuestionRequest $request)
     {        
         $question = auth()->user()->questions()->create($request->all());
 

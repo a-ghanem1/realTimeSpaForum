@@ -21,7 +21,7 @@
 				:questionSlug=question.slug
 			></create-reply>
 
-			<div class="mt-3 underline" v-else>
+			<div class="mt-3" v-else>
 				<router-link to="/login">Login to Reply</router-link>
 			</div>
 
@@ -77,9 +77,3 @@
 		}
 	}
 </script>
-
-<style>
-	.underline {
-		text-decoration: underline;
-	}
-</style>

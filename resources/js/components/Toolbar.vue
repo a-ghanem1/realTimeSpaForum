@@ -1,7 +1,9 @@
 <template>
   <div>
-    <v-toolbar>
-      <v-toolbar-title>Acme Forum</v-toolbar-title>
+    <v-toolbar color="indigo" dark>
+      <v-toolbar-title>
+        <router-link to="/"><div class="white--text">AcmeForum</div></router-link>
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
       

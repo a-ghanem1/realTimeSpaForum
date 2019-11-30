@@ -1,5 +1,9 @@
 <template>
-	<v-container fluid>
+	<v-container>
+		<v-alert v-if="errors" type="error">
+	      	Please fill out the field
+	    </v-alert>
+
 		<v-form @submit.prevent="submit">
 			<v-row>
 
@@ -18,9 +22,9 @@
 			      cols="12"
 			      md="12"
 			    >
-					<v-btn type="submit" color="orange" tile dark large v-if="editSlug">Update</v-btn>
+					<v-btn type="submit" :disabled="disable" color="orange" tile large v-if="editSlug">Update</v-btn>
 
-					<v-btn type="submit" color="success" tile dark large v-else>Create</v-btn>	
+					<v-btn type="submit" :disabled="disable" color="success" tile large v-else>Create</v-btn>	
 				</v-col>
 			</v-row>
 		</v-form>
@@ -66,6 +70,7 @@
 					name: null
 				},
 				categories: {},
+				errors: null,
 				editSlug: null
 			}
 		},
@@ -77,6 +82,11 @@
 			axios.get('/api/category')
 				.then(res => this.categories = res.data.data)
 		},
+		computed: {
+			disable() {
+				//return !this.form.name
+			}
+		},
 		methods: {
 			submit() {
 				this.editSlug ? this.update() : this.create()
@@ -86,6 +96,9 @@
 					.then(res => {
 						this.categories.unshift(res.data)
 						this.form.name = null
+					})
+					.catch(err => {
+						this.errors = err.response.data.errors
 					})
 			},
 			update() {

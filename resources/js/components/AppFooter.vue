@@ -1,9 +1,17 @@
 <template>
-  <v-footer>
-  	My Cool Spa Forum
-    <v-spacer></v-spacer>
-    <div>&copy; {{ new Date().getFullYear() }}</div>
-  </v-footer>
+  <v-footer
+  	  color="indigo"
+  	  dark
+      padless
+      class="font-weight-medium"
+    >
+      <v-col
+        class="text-center"
+        cols="12"
+      >
+        {{ new Date().getFullYear() }} — <strong>AcmeForum</strong>
+      </v-col>
+    </v-footer>
 </template>
 
 <script>

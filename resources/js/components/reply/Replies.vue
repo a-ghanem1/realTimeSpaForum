@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-toolbar color="cyan" dark dense class="mt-2">
+		<v-toolbar color="indigo" dark dense class="mt-2">
       		<v-toolbar-title>Replies</v-toolbar-title>
     	</v-toolbar>
 

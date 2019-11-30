@@ -7,6 +7,7 @@
 		      cols="12"
 		      md="12"
 		    >
+		   	  <span class="red--text" v-if="errors.title">{{ errors.title[0] }}</span>
 		      <v-text-field
 		        v-model="form.title"
 		        label="Title"
@@ -19,6 +20,7 @@
 		      cols="12"
 		      md="12"
 		    >
+		    	<span class="red--text" v-if="errors.category_id">{{ errors.category_id[0] }}</span>
 				<v-autocomplete
 				  v-model="form.category_id"
 			      label="Category"
@@ -32,6 +34,7 @@
 		      cols="12"
 		      md="12"
 		    >
+		    	<span class="red--text" v-if="errors.body">{{ errors.body[0] }}</span>
 				<vue-simplemde preview-class="markdown-body" v-model="form.body" />
 			</v-col>
 
@@ -43,8 +46,8 @@
 				  tile
 				  color="success"
 				  type="submit"
-				  dark
 				  large
+				  :disabled="disable"
 				>Create</v-btn>
 
 			</v-col>
@@ -71,11 +74,16 @@
 				.then(res => this.categories = res.data.data)
 				.catch(err => err.response.error)
 		},
+		computed: {
+			disable() {
+				//return !(this.form.title && this.form.body && this.form.category_id)
+			}
+		},
 		methods: {
 			create() {
 				axios.post('/api/question', this.form)
 					.then(res => this.$router.push(res.data.path))
-					.catch(err => this.errors = err.response.data.error)
+					.catch(err => this.errors = err.response.data.errors)
 			}
 		}
 	}
