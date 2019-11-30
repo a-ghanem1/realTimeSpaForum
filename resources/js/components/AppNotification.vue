@@ -47,6 +47,12 @@
 			if (User.loggedIn()) {
 				this.getNotifications()			
 			}
+
+			Echo.private('App.User.' + User.id())
+				.notification((notification) => {
+					this.unRead.unshift(notification)
+					this.unReadCount++	
+				})
 		},
 		computed: {
 			color() {

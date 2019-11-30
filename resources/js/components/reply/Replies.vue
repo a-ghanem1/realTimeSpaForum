@@ -32,12 +32,17 @@
 		methods: {
 			listen() {
 				this.newReply()
-				this.deleteReply()	
+				this.deleteReply()
 			},
 			newReply() {
 				EventBus.$on('newReply', (reply) => {
 					this.items.unshift(reply)	
 				})
+
+				Echo.channel('newReplyChannel')
+					.listen('NewReplyEvent', (e) => {
+						this.items.unshift(e.reply)
+					})
 			},
 			deleteReply() {
 				EventBus.$on('deleteReply', (index) => {
@@ -46,6 +51,15 @@
 							this.items.splice(index,1)
 						})
 				})
+
+				Echo.channel('deleteReplyChannel')
+					.listen('DeleteReplyEvent', (e) => {
+						for (let index = 0; index < this.items.length; index++) {
+							if (this.items[index].id == e.id) {
+								this.items.splice(index, 1)
+							}
+						}	
+					})
 			}
 		}
 	}

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Reply;
 use App\Question;
 use Illuminate\Http\Request;
+use App\Events\NewReplyEvent;
+use App\Events\DeleteReplyEvent;
 use App\Http\Resources\ReplyResource;
 use App\Notifications\NewReplyNotification;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,6 +36,10 @@ class ReplyController extends Controller
 
         $user = $question->user;
         
+        // broadcast the reply for all
+        broadcast(new NewReplyEvent(new ReplyResource($reply)))->toOthers();
+
+        // notify the own user
         if ($reply->user_id !== $question->user_id) 
         {
             $user->notify(new NewReplyNotification($reply));
@@ -61,7 +67,7 @@ class ReplyController extends Controller
     public function destroy(Question $question, Reply $reply)
     {
         $reply->delete();
-
+        broadcast(new DeleteReplyEvent($reply->id))->toOthers();
         return response(null, Response::HTTP_NO_CONTENT);
     }//end of destroy
 }
