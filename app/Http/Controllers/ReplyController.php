@@ -7,6 +7,7 @@ use App\Question;
 use Illuminate\Http\Request;
 use App\Events\NewReplyEvent;
 use App\Events\DeleteReplyEvent;
+use App\Events\UpdateReplyEvent;
 use App\Http\Resources\ReplyResource;
 use App\Notifications\NewReplyNotification;
 use Symfony\Component\HttpFoundation\Response;
@@ -59,6 +60,8 @@ class ReplyController extends Controller
     public function update(Question $question, Request $request, Reply $reply)
     {
         $reply->update($request->all());
+
+        broadcast(new UpdateReplyEvent(new ReplyResource($reply)))->toOthers();
 
         return response('Updated', Response::HTTP_ACCEPTED);
     }//end of update

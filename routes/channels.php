@@ -18,3 +18,15 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 Broadcast::channel('likeChannel', function () {
     return true;
 });
+
+Broadcast::channel('newReplyChannel', function () {
+    return true;
+});
+
+Broadcast::channel('updateReplyChannel', function () {
+    return true;
+});
+
+Broadcast::channel('deleteReplyChannel', function () {
+    return true;
+});

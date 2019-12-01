@@ -33,6 +33,7 @@
 			listen() {
 				this.newReply()
 				this.deleteReply()
+				this.updateReply()
 			},
 			newReply() {
 				EventBus.$on('newReply', (reply) => {
@@ -60,6 +61,16 @@
 							}
 						}	
 					})
+			},
+			updateReply() {
+				Echo.channel('updateReplyChannel')
+			    .listen('UpdateReplyEvent', (e) => {
+			    	for (let index = 0; index < this.items.length; index++) {
+							if (this.items[index].id == e.reply.id) {
+								this.items[index].body = e.reply.body
+							}
+						}	
+			    })
 			}
 		}
 	}

@@ -23,6 +23,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\DeleteReplyEvent' => [
             'App\Listeners\DeleteReplyEventListener'
+        ],
+        'App\Events\UpdateReplyEvent' => [
+            'App\Listeners\UpdateReplyEventListener'
         ]
     ];
 
