@@ -2,6 +2,7 @@
 
 ## using Laravel, Pusher, VueJs, Vuetify, JWT.
 
+First of all, your need to run ``` composer install ``` then, 
 1. Add the SQL file to your DB.
 2. Edit your DB settings in .env file.
 3. ``` php artisan migrate:fresh --seed ```.
