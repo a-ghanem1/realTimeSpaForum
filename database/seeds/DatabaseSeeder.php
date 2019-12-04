@@ -5,8 +5,8 @@ use App\Like;
 use App\Reply;
 use App\Category;
 use App\Question;
-
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $admin = new User();
+
+        $admin->name     = "ahmed";
+        $admin->email    = "super@admin.com";
+        $admin->password = 'secret';
+        $admin->save();
+
         factory(User::class, 10)->create();
         factory(Category::class, 5)->create();
         factory(Question::class, 10)->create();
