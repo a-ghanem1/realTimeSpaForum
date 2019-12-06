@@ -27,7 +27,7 @@ class Token {
 
 	isBase64(str) {
 		try {
-			return btoa(atob(str)).replace(/=/, "") == str			
+			return btoa(atob(str)).replace(/=/g, "") == str			
 		} catch(err) {
 			return false
 		}
