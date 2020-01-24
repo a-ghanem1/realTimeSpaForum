@@ -40,7 +40,8 @@
 			return {
 				read: {},
 				unRead: {},
-				unReadCount: 0	
+				unReadCount: 0,
+				sound: "http://soundbible.com/mp3/glass_ping-Go445-1207030150.mp3"
 			}
 		},
 		created() {
@@ -50,6 +51,7 @@
 
 			Echo.private('App.User.' + User.id())
 				.notification((notification) => {
+					this.playsound()
 					this.unRead.unshift(notification)
 					this.unReadCount++	
 				})
@@ -60,6 +62,10 @@
 			}
 		},
 		methods: {
+			playsound() {
+				let alert = new Audio(this.sound)
+				alert.play()
+			},
 			getNotifications() {
 				axios.get('/api/notifications')
 					.then(res => {
