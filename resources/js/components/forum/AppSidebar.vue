@@ -8,7 +8,7 @@
 	      <v-list-item
 	        v-for="category in categories"
 	        :key="category.id"
-	        @click=""
+	        @click="showQuestions(category.name)"
 	      >
 	      
 	        <v-list-item-content>
@@ -31,6 +31,11 @@
 			axios.get('/api/category')
 				.then(res => this.categories = res.data.data)
 				.catch(err => console.log(err.response.data))
+		},
+		methods: {
+			showQuestions(category) {
+				EventBus.$emit('showCategoryQuestions', category)
+			}
 		}
 	}
 </script>

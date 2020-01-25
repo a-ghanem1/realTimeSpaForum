@@ -18,6 +18,7 @@ Route::group([
 
 
 // Question
+Route::get('/question/{category}', 'QuestionController@showQuestionsByCategory');
 Route::apiResource('/question', 'QuestionController');
 
 // Category

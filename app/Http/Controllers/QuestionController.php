@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Question;
 use Illuminate\Http\Request;
 use App\Http\Requests\QuestionRequest;
@@ -18,7 +19,7 @@ class QuestionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('jwt', ['except' => ['index', 'show']]);
+        $this->middleware('jwt', ['except' => ['index', 'show', 'showQuestionsByCategory']]);
     }
 
     public function index()
@@ -39,6 +40,11 @@ class QuestionController extends Controller
     {
         return new QuestionResource($question);
     }//end of show
+
+    public function showQuestionsByCategory(Category $category)
+    {
+       return QuestionResource::collection(Question::where('category_id', $category->id)->get());
+    }//end of showQuestionsByCategory
 
     
     public function update(Request $request, Question $question)

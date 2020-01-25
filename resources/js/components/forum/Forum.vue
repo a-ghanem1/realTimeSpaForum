@@ -25,7 +25,8 @@
 	export default {
 		data() {
 			return {
-				questions: {}
+				questions: {},
+				categoryName: ""
 			}
 		},
 		components: {
@@ -33,9 +34,21 @@
 			AppSidebar
 		},
 		created() {
-			axios.get('api/question')
-				.then(res => this.questions = res.data.data)
-				.catch(err => console.log(err.response.data))
+			this.categoryListenter()
+			this.getQuesitons()
+		},
+		methods: {
+			getQuesitons() {
+				axios.get(`api/question/${this.categoryName ? this.categoryName : ""}`)
+					.then(res => this.questions = res.data.data)
+					.catch(err => console.log(err.response.data))
+			},
+			categoryListenter() {
+				EventBus.$on('showCategoryQuestions', (categoryName) => {
+					this.categoryName = categoryName
+					this.getQuesitons()
+				})
+			}
 		}
 	}
 </script>
